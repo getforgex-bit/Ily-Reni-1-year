@@ -1,0 +1,3 @@
+# Página personal: que no aparezca en buscadores
+User-agent: *
+Disallow: /

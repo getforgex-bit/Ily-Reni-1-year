@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#06030d">
+    <meta name="robots" content="noindex">
+    <title>Un año contigo, mi Reni 💜</title>
+    <meta name="description" content="Una página hecha a mano para celebrar nuestro primer año juntos.">
+    <meta property="og:title" content="Un año contigo, mi Reni 💜">
+    <meta property="og:description" content="Cuatro años de amistad y una vuelta completa al sol, contigo.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.replace('no-js', 'js');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Fondo: nebulosa + cielo de estrellas en capas -->
+    <div class="nebulosa" aria-hidden="true"></div>
+    <canvas id="cielo" aria-hidden="true"></canvas>
+    <div class="grano" aria-hidden="true"></div>
+    <div id="lluvia-flores" aria-hidden="true"></div>
+
+    <!-- Símbolos SVG reutilizables -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="destello" viewBox="-10 -10 20 20">
+                <path d="M0-10 C0.6-2.4 2.4-0.6 10 0 C2.4 0.6 0.6 2.4 0 10 C-0.6 2.4-2.4 0.6-10 0 C-2.4-0.6-0.6-2.4 0-10Z" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Portada de entrada -->
+    <div class="portada" id="portada">
+        <div class="portada-contenido">
+            <p class="portada-fecha">29 · 09 · 2026</p>
+            <p class="portada-para">Para mi Reni</p>
+            <p class="portada-titulo">Cuatro años de amistad<br>y una vuelta completa al sol, contigo.</p>
+            <button class="boton" id="btn-abrir-portada">Abrir <span aria-hidden="true">✦</span></button>
+        </div>
+    </div>
+
+    <!-- Índice en forma de constelación (escritorio) -->
+    <nav class="indice" aria-label="Capítulos">
+        <ol>
+            <li><a href="#inicio" data-indice="inicio"><span class="indice-texto">Un año</span></a></li>
+            <li><a href="#historia" data-indice="historia"><span class="indice-texto">Nuestra historia</span></a></li>
+            <li><a href="#momentos" data-indice="momentos"><span class="indice-texto">Nuestros momentos</span></a></li>
+            <li><a href="#te-necesito" data-indice="te-necesito"><span class="indice-texto">Te necesito</span></a></li>
+            <li><a href="#flores" data-indice="flores"><span class="indice-texto">Flores</span></a></li>
+            <li><a href="#futuro" data-indice="futuro"><span class="indice-texto">El futuro</span></a></li>
+            <li><a href="#razones" data-indice="razones"><span class="indice-texto">Razones</span></a></li>
+            <li><a href="#vales" data-indice="vales"><span class="indice-texto">Talonario</span></a></li>
+            <li><a href="#carta-anual" data-indice="carta-anual"><span class="indice-texto">La carta</span></a></li>
+        </ol>
+    </nav>
+
+    <main>
+        <!-- Espirales sutiles de fondo (se dibujan desde script.js) -->
+        <div class="espirales" id="espirales" aria-hidden="true"></div>
+
+        <!-- ============ HERO ============ -->
+        <header class="hero" id="inicio">
+            <svg class="constelacion" id="constelacion" viewBox="0 0 200 200" aria-hidden="true"></svg>
+
+            <div class="hero-contenido">
+                <p class="hero-fechas">29 · 09 · 2025 <span class="hero-linea"></span> 29 · 09 · 2026</p>
+                <h1 class="hero-titulo"><span class="hero-un">Un</span><span class="hero-anio">año</span></h1>
+                <p class="hero-sub">Feliz primer aniversario, mi Reni</p>
+                <p class="hero-cita">Cuatro años siendo tu amigo, uno siendo tu novio<br>y todos los que vengan.</p>
+
+                <div class="contador" role="timer" aria-label="Tiempo juntos">
+                    <div class="contador-unidad"><span class="contador-num" id="c-anios">0</span><span class="contador-etq">Año</span></div>
+                    <div class="contador-unidad"><span class="contador-num" id="c-meses">00</span><span class="contador-etq">Meses</span></div>
+                    <div class="contador-unidad"><span class="contador-num" id="c-dias">00</span><span class="contador-etq">Días</span></div>
+                    <div class="contador-unidad"><span class="contador-num" id="c-horas">00</span><span class="contador-etq">Horas</span></div>
+                    <div class="contador-unidad"><span class="contador-num" id="c-min">00</span><span class="contador-etq">Min</span></div>
+                    <div class="contador-unidad"><span class="contador-num" id="c-seg">00</span><span class="contador-etq">Seg</span></div>
+                </div>
+                <p class="contador-total">Llevamos <strong id="c-total">365</strong> días de novios y cuatro años de amigos</p>
+
+                <a class="hero-aviso" href="#carta-anual">Al final hay una carta esperándote <span aria-hidden="true">✉</span></a>
+            </div>
+
+            <a class="hero-bajar" href="#historia" aria-label="Bajar al primer capítulo"><span></span></a>
+        </header>
+
+        <!-- ============ I. NUESTRA HISTORIA ============ -->
+        <section class="capitulo revelar" id="historia">
+            <header class="cap-cabecera" data-num="I">
+                <p class="cap-num">Capítulo I</p>
+                <h2>Nuestra historia</h2>
+            </header>
+            <ol class="linea-tiempo">
+                <li class="hito">
+                    <span class="hito-fecha">Hace cuatro años</span>
+                    <span class="hito-titulo">Te conocí</span>
+                    <span class="hito-texto">Sin saberlo, ahí empezó todo.</span>
+                </li>
+                <li class="hito">
+                    <span class="hito-fecha">Tres años</span>
+                    <span class="hito-titulo">Amigos</span>
+                    <span class="hito-texto">Risas, cafeterías, frappés de chocolate blanco y pláticas de todo.</span>
+                </li>
+                <li class="hito">
+                    <span class="hito-fecha">29 · 09 · 2025</span>
+                    <span class="hito-titulo">Novios</span>
+                    <span class="hito-texto">Lo que ya sentía por fin tuvo nombre.</span>
+                </li>
+                <li class="hito hito-hoy">
+                    <span class="hito-fecha">29 · 09 · 2026</span>
+                    <span class="hito-titulo">Un año</span>
+                    <span class="hito-texto">Una vuelta completa al sol, y aquí es donde quiero estar.</span>
+                </li>
+            </ol>
+            <article class="carta">
+                <p class="saludo">Para ti, mi vida</p>
+                <p class="capitular">Mi ñoñita preciosha, única en el mundo como lo es la primera estrella que se enciende
+                    al caer la noche — eres tú, siempre tú. Contigo quiero estar, contigo es con quien me quiero quedar,
+                    porque en ti encontré el lugar al que siempre quise llegar.</p>
+                <p>No me dejes nunca, mi amor, yo te necesito — quizás no para respirar, quizás no para sobrevivir, pero
+                    sí para vivir por completo, para sentir que cada amanecer tiene un propósito, que cada latido tiene un
+                    nombre: el tuyo.</p>
+                <p>Contigo todo cobra sentido, como cuando la lluvia da sentido al calor, como cuando la luna da sentido
+                    al mar. Todo es profundamente más cálido a tu lado, como si el mundo entero hubiera bajado la guardia
+                    y decidido por fin volverse hogar. Eres mi complemento — todo aquello que me hace feliz y me da
+                    aliento — porque tú me brindas todo: llenas de dicha y buena nueva mi alma, me completas y siempre me
+                    llenas de calma.</p>
+                <p>Te amo, mi bebeshita boñita — es lo único que puedo decirte para tratar de encapsular todo lo que
+                    siento por ti. Pero incluso un "te amo" se queda corto, como un vaso pequeño tratando de contener el
+                    océano. Las palabras son apenas sombras de lo que guardas en mí. Tú eres perfecta para mí, eres todo
+                    lo que siempre quise y quiero, la respuesta a preguntas que nunca supe formular. Soy muy afortunado
+                    de haberte conocido — de que el destino, o la vida, o algo más grande que yo, haya conspirado para
+                    ponerte aquí, a mi lado.</p>
+                <p>Te aprecio tanto, mi niñita preciosha, hermosha, maravillosha... Significas tanto para mí que a veces
+                    me detengo en silencio solo para sentir el peso hermoso de tenerte. Nunca olvidaré el día en que te
+                    conocí, grabado en mí como la primera vez que ves el mar y entiendes que algo cambió para siempre.
+                    Tampoco olvidaré los tres años que vinieron después, cuando fuiste mi amiga, la persona en la que
+                    más confiaba y mi lugar favorito para platicar de todo y de nada. Y mucho menos olvidaré aquel 29 de
+                    septiembre en que por fin nos hicimos novios: un año que se siente como una vida entera aprendida de
+                    nuevo, y al mismo tiempo como un suspiro que no quiero que termine.</p>
+                <p>Eres mi constante, mi norte, mi calma en el ruido. Lo eres como mi amiga desde hace cuatro años y
+                    como mi novia desde hace uno, porque nunca dejamos de ser amigos. Y mientras el tiempo siga pasando, yo seguiré eligiéndote: hoy, mañana y cada día que me quede
+                    por vivir.</p>
+            </article>
+        </section>
+
+        <!-- ============ II. NUESTROS MOMENTOS ============ -->
+        <section class="capitulo capitulo-ancho revelar" id="momentos">
+            <header class="cap-cabecera" data-num="II">
+                <p class="cap-num">Capítulo II</p>
+                <h2>Nuestros momentos</h2>
+                <p class="cap-bajada">Pedacitos de nosotros guardados en fotitos. Toca cualquiera para verla en grande.</p>
+            </header>
+            <!-- Los álbumes se generan desde script.js (constante ALBUMES) -->
+            <div id="albumes"></div>
+        </section>
+
+        <!-- ============ III. TE NECESITO ============ -->
+        <section class="capitulo revelar" id="te-necesito">
+            <header class="cap-cabecera" data-num="III">
+                <p class="cap-num">Capítulo III</p>
+                <h2>Te necesito, Reni</h2>
+            </header>
+            <article class="carta">
+                <p class="capitular">Te necesito, Reni. Necesito tus abrazos como el árbol necesita la lluvia que lo
+                    empapa y lo devuelve a la vida. Necesito tus besos, esos que caen suaves sobre mí como pétalos que el
+                    viento arranca sin permiso, y tus caricias, que recorren mi piel como ríos que conocen de memoria el
+                    camino al mar. Necesito todo tu amor —ese amor tuyo, tan tuyo, tan mío—, porque en él me he
+                    convertido en alguien que finalmente sabe a qué sabe la paz.</p>
+                <p>Te necesito, mi ñoñita boñita, en quien he depositado mi confianza como se deposita una semilla en
+                    tierra fértil, sin saber exactamente cuándo florecerá, pero sabiendo con certeza que lo hará. Y has
+                    florecido. Y me has florecido a mí. Te has convertido en mi hogar: no esas cuatro paredes de madera y
+                    cemento, sino ese lugar sin coordenadas donde el alma suelta el peso y respira.</p>
+                <p>Necesito tu cariño, bebeshita boñita. Me siento vulnerable, como una llama pequeña en un cuarto de
+                    ventanas abiertas, y aun así no me apago porque pienso en ti. Y contigo quiero estar. Contigo, en mi
+                    lugar seguro, donde el tiempo no duele y el mundo no pesa tanto. Donde soy feliz —y no de una
+                    felicidad prestada, sino de la que crece desde adentro, callada y firme, como raíz que no se ve pero
+                    que lo sostiene todo.</p>
+                <p>Te extraño, mi Reni linda. Te extraño con una intensidad que no cabe en una sola palabra —hay que
+                    derramarla, extenderla, dejarla manchar el papel. Extraño esos hermosos ojitos tuyos, oscuros y
+                    luminosos al mismo tiempo, como noche de estrellas que no necesita luna; esos ojos que cuando los veía
+                    sentía que estaba leyendo el único libro que valía la pena releer mil veces. Extraño tu dulce vocecita
+                    diciendo mi nombre como si fuera algo especial, como si al pronunciarlo lo rescatara de entre todas
+                    las palabras del mundo y le diera otro significado. Extraño cuando me decías cositas bonitas —esas
+                    palabras pequeñas que tenían el peso de montañas, la calidez de un sol de tarde.</p>
+                <p>Te extraño a ti, bebeshita preciosha, porque contigo todo es mejor: la mañana tiene otro color, el
+                    silencio tiene otra textura, incluso el aire parece más amable. Te amo tanto, mi dulce amor, que el
+                    amor mismo se me queda corto cuando intento nombrarlo.</p>
+                <p>Tengo una sensación extraña que no logra acomodarse del todo en el pecho, como algo que ocupa el
+                    espacio justo donde va el descanso. Y es esto: te amo como jamás he amado a nadie. No de la manera en
+                    que se ama una canción bonita o un recuerdo dorado, sino de esa otra manera, la que va más hondo —la
+                    que duele un poco porque es demasiado real para no dolerle algo al corazón.</p>
+                <p>Y simplemente no puedo dejar de pensar en ti. En todo momento. En todo lugar. Me visitas en la mañana
+                    cuando el café humea y el mundo todavía no ha empezado a pedir nada. Me visitas en la tarde cuando el
+                    ruido se vuelve ruido y yo solo quiero tu voz. Me visitas de noche cuando el silencio habla demasiado.
+                    Llegas de tantas maneras que ya perdí la cuenta: a veces como imagen, a veces como intuición, a veces
+                    como ese olor que de repente aparece sin origen y me regresa a algún momento tuyo, nuestro,
+                    mío-tuyo.</p>
+                <p>En estos cuatro años hemos vivido de todo: tres como amigos y uno como novios, sin dejar nunca de ser amigos. Hemos reído hasta cansarnos, hemos llorado hasta quedar limpios, hemos
+                    compartido hasta lo que no tiene nombre —hasta nuestra intimidad más profunda, ese territorio donde ya
+                    no hay actuaciones ni disfraces, solo lo que somos cuando nadie más mira. Y en ese territorio nos
+                    reconocimos. Nos elegimos. Una y otra vez.</p>
+                <p>Después de cuatro años de amistad, el último ya como novios, parece que ya no queda nada por descubrir. Esa
+                    sensación de estrenar cada cosa, de abrir una puerta y asombrarse, ya la vivimos y la bebimos hasta el
+                    fondo, y le cedió el paso a algo más sereno y más sólido: la certeza. Tú y yo somos como una casa ya establecida. No una casa
+                    nueva que huele a pintura y promesas, sino una con historia en las paredes y raíces en el suelo. Un
+                    hogar.</p>
+                <p class="cierre">Nuestro hogar. 💜</p>
+            </article>
+        </section>
+
+        <!-- ============ IV. FLORES ============ -->
+        <section class="capitulo revelar" id="flores">
+            <header class="cap-cabecera" data-num="IV">
+                <p class="cap-num">Capítulo IV</p>
+                <h2>Todas las flores del mundo son para ti</h2>
+                <p class="cap-bajada">Un ramito de tulipanes, gerberas y lirios hecho con todo mi amor, solo para ti, mi niña preciosa.</p>
+            </header>
+            <div class="jardin">
+                <!-- El ramo se dibuja desde script.js -->
+                <div class="ramo" id="ramo" role="img" aria-label="Ramo de tulipanes, gerberas y lirios blancos, amarillos y morados"></div>
+                <p class="ramo-leyenda">Tulipanes · Gerberas · Lirios</p>
+                <button class="boton" id="btn-flores">Hacer llover flores <span aria-hidden="true">🌸</span></button>
+            </div>
+        </section>
+
+        <!-- ============ V. EL FUTURO ============ -->
+        <section class="capitulo revelar" id="futuro">
+            <header class="cap-cabecera" data-num="V">
+                <p class="cap-num">Capítulo V</p>
+                <h2>El futuro</h2>
+            </header>
+            <article class="carta">
+                <p class="capitular">En el futuro estamos nosotros dos, solitos, sin nadie más. Lejos del ruido, lejos de
+                    todo aquello que alguna vez intentó rompernos o hacernos dudar — lejos de las voces que no supieron
+                    entender lo que teníamos, de las tormentas que pasamos y que, al final, solo nos hicieron más
+                    fuertes. Solo tú y yo, construyendo esa vida que tantas veces imaginamos entre desvelos, abrazos
+                    robados y sueños compartidos en voz baja, como si tuviéramos miedo de que el mundo los escuchara
+                    antes de que fueran realidad.</p>
+                <p>Y quizás no estemos tan solos… porque junto a nosotros corre una ñoñita tan boñita como tú, con sus
+                    pasos pequeños y su risa que suena como agua sobre piedras. Tiene tus mismos ojitos hermosos — esa
+                    miradita que me derrite el corazón cada vez que la veo, igual que me lo derritieron los tuyos la
+                    primera vez. Lleva tu precioso nombre: Renata. Y cada vez que nos llama "papá" y "mamá", el mundo
+                    entero parece detenerse, aunque sea por un instante, como si el tiempo mismo quisiera quedarse a ver
+                    algo tan hermoso.</p>
+                <p>Vivimos en una casita bonita, de esas que se sienten cálidas apenas cruzas la puerta — donde el olor a
+                    café y a tierra mojada se mezclan por las mañanas, y donde cada rincón guarda algo nuestro. Tiene un
+                    jardín lleno de vida: florecitas que se mueven con el viento como si bailaran una canción que solo
+                    ellas escuchan, y pequeñas huellitas por todas partes — porque tenemos muchos chihuahuitas traviesos,
+                    gatitos curiosos que se suben a donde no deben, y cotorritas escandalosas que llenan la casa de
+                    ruido, de color y de esa alegría desordenada que hace que un hogar se sienta vivo.</p>
+                <p>Las tardes son tranquilas con ese silencio bueno, el que no incomoda sino que abraza. A veces tú
+                    riegas las plantitas mientras yo te observo desde adentro, sonriendo sin decir nada, pensando en lo
+                    increíble que es haberte encontrado — en lo mucho que tuvo que pasar para que nuestros caminos se
+                    cruzaran exactamente así, exactamente cuando se cruzaron. Otras veces estamos los tres abrazados en el
+                    sillón mientras afuera llueve despacito, con ese sonido suave que convierte cualquier lugar en
+                    refugio, y nuestros animalitos dormitan cerca, calentitos, como si supieran que ahí, en ese instante,
+                    todo está bien.</p>
+                <p>Lo que empezó como una amistad, y hace un año se volvió nuestro noviazgo, en ese futuro ya es una
+                    familia. Todo es muy feliz. Somos solo nosotros y nadie más. Sin prisas. Sin miedo. Sin
+                    despedidas.</p>
+                <p>Y aunque el tiempo siga avanzando, aunque el mundo cambie mil veces y los años nos vayan cambiando a
+                    nosotros también… yo seguiría escogiendo ese futuro contigo. Una y otra vez. Sin dudarlo. Sin mirar
+                    atrás.</p>
+                <p class="cierre">Porque tú eres el futuro que vale la pena esperar, y también el presente que ya no
+                    quiero soltar. 💜</p>
+            </article>
+        </section>
+
+        <!-- ============ VI. RAZONES ============ -->
+        <section class="capitulo revelar" id="razones">
+            <header class="cap-cabecera" data-num="VI">
+                <p class="cap-num">Capítulo VI</p>
+                <h2>Razones por las que te amo</h2>
+                <p class="cap-bajada">Algunas las escribí este año; otras las fui juntando en estos cuatro años de amistad.</p>
+            </header>
+            <div class="razon">
+                <p class="razon-texto" id="razon-texto" aria-live="polite">Toca el botón para descubrir una.</p>
+                <p class="razon-cuenta" id="razon-cuenta"></p>
+                <button class="boton" id="btn-razon">Dime por qué me amas <span aria-hidden="true">💖</span></button>
+            </div>
+        </section>
+
+        <!-- ============ VII. TALONARIO ============ -->
+        <section class="capitulo capitulo-ancho revelar" id="vales">
+            <header class="cap-cabecera" data-num="VII">
+                <p class="cap-num">Capítulo VII</p>
+                <h2>Talonario de amor</h2>
+                <p class="cap-bajada">Canjeables cuando quieras, donde quieras, solo conmigo.</p>
+            </header>
+            <!-- Los vales se generan desde script.js (constante VALES) -->
+            <div class="vales" id="vales-lista"></div>
+        </section>
+
+        <!-- ============ VIII. LA CARTA DEL PRIMER AÑO ============ -->
+        <section class="capitulo revelar" id="carta-anual">
+            <header class="cap-cabecera" data-num="VIII">
+                <p class="cap-num">Capítulo VIII</p>
+                <h2>La carta de nuestro primer año</h2>
+            </header>
+
+            <button class="sobre" id="sobre" aria-controls="carta-papel" aria-expanded="false">
+                <span class="sobre-solapa" aria-hidden="true"></span>
+                <span class="sobre-sello" aria-hidden="true">R</span>
+                <span class="sobre-para">Para: mi Reni</span>
+                <span class="sobre-de">De: tu bebeshito · 29 · 09 · 2026</span>
+                <span class="sobre-accion">Toca para romper el sello</span>
+            </button>
+
+            <article class="papel" id="carta-papel">
+                <p class="saludo">Mi Reni, mi ñoñita hermosha, mi bebé grande 💜</p>
+
+                <p class="capitular">Llevo mucho tiempo queriendo juntar en un solo lugar todo lo que te he escrito a lo
+                    largo de este año, en distintos días, en distintas noches, en distintas versiones de mí. Aunque he ido
+                    cambiando la forma de decirlo, lo que hay debajo sigue siendo lo mismo. Así que esta carta es eso:
+                    todo junto, con mi voz de ahora, con los apodos que hoy me nacen y con el mismo corazón de
+                    siempre.</p>
+
+                <p>Eres como un angelito que flota como pluma en un mundo ideal, con esa gracia ligerita y esa chispa
+                    natural que no se fabrica, que nace contigo y envuelve todo lo que miras. Tu carita es un milagro
+                    suavecito, como porcelana blanca, un lienzo vivo que guarda luz en cada detalle. Y tus ojitos, ay,
+                    tus ojitos de café oscuro con miel en la noche: son estrellas grandes donde caben universos enteros,
+                    y perderme en ellos es viajar entre galaxias sin moverme de mi lugar.</p>
+
+                <p>Me encanta tu sonrisita de gatito, y esa otra tuya, la que sale al revés, casi un idioma secreto que
+                    me avisa que algo bonito te pasó. Me encanta tu risa a carcajadas, esa sinfonía que uno no se quiere
+                    perder. Tu cabellito cayendo como río suave, tu cabecita tan perfecta para mis caricias, tus manitas,
+                    tus piecitos chiquitos y cutes, tus cachetitos, tu maquillaje que nunca le roba protagonismo a nada
+                    porque sabe que tu belleza brilla sola. Eres chaparrita, sí, pero enorme en presencia. Y nadie es
+                    perfecto, pero si la perfección existiera, se parecería demasiado a ti.</p>
+
+                <p class="verso">Eres mi estrellita, mi luz chiquitita,<br>
+                    mi pedashito de cielo en forma de niñita,<br>
+                    mi flor delicadita, mi calma bonita,<br>
+                    la razón por la que mi corazón se acurruca y se agita.</p>
+
+                <p>Y no me enamoré de ti de un día para otro. Antes de ser tu novio fui tu amigo, y ahí ya me habías
+                    regalado tantísimo: las risas, las cafeterías, la coca o el frappé de chocolate blanco que nos
+                    rescataba de la monotonía, las pláticas sobre las ponis lesbianas y sobre nuestras vidas siempre tan
+                    variadas, bailar juntos, aventar un huevo y todas esas ocurrencias que solo se nos ocurren a
+                    nosotros. Hasta aquella hojita en los labios que una vez fue nuestra costumbre. Todo eso reposa
+                    suavecito en mi memoria, junto con cada abrazo, cada "te quiero" y cada regalito. En esa amistad
+                    aprendí lo que es la lealtad, porque me quedé creyendo en algo que todavía no tenía nombre pero que yo
+                    ya alcanzaba a sentir. Lo digo sin reproche y con muchísima gratitud: valió la pena cada espera,
+                    hasta las de Los Juncos.</p>
+
+                <p>Y luego llegó este año, mi vida. Una vuelta completa al sol contigo: las cuatro estaciones, los días
+                    tranquilitos y los chuecos, las risas de las que uno ya ni se acuerda cómo empezaron y las
+                    conversaciones difíciles que nos fueron enseñando a querernos mejor. Este año me enseñó cosas de mí
+                    que no sabía, y todavía sigo aprendiéndolas. Me quedo con todos sus días, los que fueron fáciles y
+                    los que costaron, porque todos nos trajeron hasta aquí, y aquí es exactamente donde quiero
+                    estar.</p>
+
+                <p>Contigo siempre tuve confianza, siempre fuiste la persona en la que más confié, y con el tiempo eso
+                    creció en lugar de gastarse. Antes me sentía como un bicho raro, perdido, fuera de sitio, y contigo
+                    me siento cobijado, como si por fin la nota que no encajaba encontrara su lugar. Recuerdo cuando te
+                    alejabas seguido y me dolía, y recuerdo lo distinto que se siente cuando te acercas, cuando te
+                    recargas en mí como aquella vez de hace tres años, por comodidad, por cercanía, por confianza. Esas
+                    cosas no se improvisan: se construyen con gestos, con paciencia y con volver.</p>
+
+                <p>Quiero que sepas algo que quizá no te digo lo suficiente: yo no me enamoré de una versión perfecta de
+                    ti. Amo a la persona que eres, con todo lo que has cambiado y aprendido, con tus errores, tus enojos,
+                    tus rabietas y hasta con tus espacios, esos que también estoy aprendiendo a respetar. No necesito que
+                    seas la misma Reni de hace años. Me quedo con la de ahora y con la que poquito a poquito vas siendo,
+                    con tus días buenos y con los difíciles.</p>
+
+                <p>También quiero ser honesto, porque prefiero decirte lo que siento a fingir que todo es perfecto: a
+                    veces me da miedo no ser tan único para ti como tú lo eres para mí. Pero sé que ese miedo es mío, que
+                    le toca a mi cabecita aprender a cuidarlo, y que no es una cuenta que tengas que pagar tú. No quiero
+                    que me elijas por lástima ni por miedo a lastimarme. Si algún día me eliges, que sea porque, entre
+                    todas las personas que existen, tú quisiste que fuera yo. Yo, por mi parte, ya te elegí: hoy, mañana
+                    y cada día, con los ojos bien abiertos.</p>
+
+                <p>Y si alguna vez la distancia o el silencio se ponen en medio, recuerda que un horizonte no es un muro.
+                    Es solo el lugar donde la tierra parece separarse del cielo. Puede poner kilómetros entre nuestros
+                    cuerpos, pero no encuentra cómo ponerlos entre nuestras almas, porque lo que siento por ti es una
+                    lucecita que llevo en la mano mientras camino, y la luz no entiende de kilómetros. No te prometo que
+                    nunca habrá noches largas. Te prometo que no vengo a negar la noche, vengo a hacer una fogatita en
+                    medio de ella, sentarme a tu lado y decirte "aquí estoy". Te amo como las estrellas aman la noche,
+                    sin querer destruir su oscuridad, aprendiendo a habitarla y llenándola de puntitos brillantes. Y como
+                    el amanecer, que siempre encuentra cómo volver aunque por unas horas parezca que la luz se fue para
+                    siempre.</p>
+
+                <p>Porque para mí, hogar dejó de ser una casita, una ciudad o un punto en el mapa desde que te encontré.
+                    Hogar empezó a tener tu nombre, tu voz, tu risa. Eres mi brújula, no porque me digas a dónde ir, sino
+                    porque cuando pienso en ti todas las direcciones se ordenan solitas. Eres la nota hogar, cálida y
+                    serena, el acorde al que siempre regreso.</p>
+
+                <p class="verso">Te amo en la tormenta y te amo en el viento,<br>
+                    te amo en la calma y en el silencio lento,<br>
+                    te amo en la risa, te amo en el llanto,<br>
+                    te amo cuando lo callo y te amo cuando lo canto.<br>
+                    Te amo en los sueños, te amo en lo real,<br>
+                    en lo que duele y en lo que es especial,<br>
+                    en cada estación, en cada suspiro,<br>
+                    en cada rinconcito donde te miro y respiro.</p>
+
+                <p>Eres mi flor de invierno. Floreciste cuando todo estaba quieto, cuando el frío lo cubría todo, y aun
+                    así trajiste color. Y ahora que ya vimos pasar todas las estaciones juntos, sigo pensando lo mismo:
+                    florecerías en cualquiera. Eres calma, eres fuerza disfrazada de ternura, y la prueba viva de que
+                    incluso en los días más grises puede nacer algo hermoso.</p>
+
+                <p>Si un año contigo se sintió como hogar, no me da miedo imaginar lo que viene. A veces me lo imagino
+                    sin prisa: nuestra casita, los chihuahuas, los gatitos, las cotorritas, quizá algún día una niñita con
+                    tu carita y con los dos apellidos, y nosotros ahí, aprendiendo a querernos en cada etapa,
+                    enamorándome otra vez de la persona en la que te vayas convirtiendo.</p>
+
+                <p>No tienes que contestarme esta carta ni hacer nada con ella. Solo quería dejarla aquí, como quien deja
+                    una lucecita prendida por si la necesitas. Gracias por ser, por estar, por volver al principio, por
+                    este primer añito y por vivir el presente conmigo. Que descanses bonito y que sientas, sin ninguna
+                    duda, que eres profundamente querida, porque lo eres.</p>
+
+                <p class="papel-teamo">Te amo, Reni. Eres todo para mí.</p>
+
+                <p class="papel-final">Y sobre todas las cosas que eres, siempre has sido, siempre eres y siempre serás
+                    mi única, inigualable, hermosha, dulce y tierna <em>Cute Kawaiiii</em>. 🫰💜✨</p>
+
+                <p class="firma">Tu bebeshito,<br>con un año de cariño y todos los que vengan.</p>
+            </article>
+        </section>
+
+        <!-- ============ FINAL ============ -->
+        <section class="final revelar">
+            <p class="final-texto">¿Aún quieres más? Aquí hay dos cositas escondidas.</p>
+            <button class="boton boton-grande" id="btn-extraname">Toca cuando me extrañes <span aria-hidden="true">💜</span></button>
+            <button class="boton boton-fantasma" id="btn-secreto">🔐 Revelar nuestro futuro</button>
+        </section>
+
+        <footer class="pie">
+            <svg class="pie-estrella" aria-hidden="true"><use href="#destello" /></svg>
+            <p>Hecho a mano, estrella por estrella, para mi Reni.</p>
+            <p class="pie-fecha">Amigos desde hace cuatro años · novios desde el 29 · 09 · 2025</p>
+        </footer>
+    </main>
+
+    <!-- ============ MÚSICA (Spotify) ============ -->
+    <aside class="musica" id="musica" aria-label="Música">
+        <div class="musica-panel" id="musica-panel" role="dialog" aria-label="Nuestras canciones">
+            <div class="musica-cabecera">
+                <p class="musica-titulo">Nuestras canciones</p>
+                <button class="icono-btn" id="musica-cerrar" aria-label="Cerrar música">×</button>
+            </div>
+            <div class="musica-controles" id="musica-controles" hidden>
+                <button class="musica-play" id="musica-play" aria-label="Reproducir">
+                    <svg viewBox="0 0 24 24" class="ico-play" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" /></svg>
+                    <svg viewBox="0 0 24 24" class="ico-pausa" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /></svg>
+                </button>
+                <div class="musica-progreso" aria-hidden="true"><span id="musica-barra"></span></div>
+            </div>
+            <!-- La cabecera del reproductor de Spotify (portada y nombre de la playlist) queda recortada
+                 con --spotify-recorte en style.css; solo se ve la lista de canciones. -->
+            <div class="spotify-recorte">
+                <div id="spotify-embed"></div>
+            </div>
+            <p class="musica-nota">Toca una canción para escucharla. Si no has iniciado sesión en Spotify, suenan
+                fragmentos de 30 segundos.</p>
+        </div>
+        <button class="musica-pastilla" id="musica-pastilla" aria-expanded="false" aria-controls="musica-panel">
+            <span class="musica-disco" aria-hidden="true"></span>
+            <span class="musica-pastilla-texto">
+                <span class="musica-kicker">Nuestra música</span>
+                <span id="musica-estado">Toca para abrir</span>
+            </span>
+        </button>
+    </aside>
+
+    <!-- ============ VISOR DE FOTOS ============ -->
+    <div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+        <button class="icono-btn visor-cerrar" id="visor-cerrar" aria-label="Cerrar">×</button>
+        <button class="visor-nav visor-prev" id="visor-prev" aria-label="Foto anterior">‹</button>
+        <figure class="visor-figura">
+            <img id="visor-img" alt="">
+            <figcaption><span id="visor-titulo"></span><span class="visor-cuenta" id="visor-cuenta"></span></figcaption>
+        </figure>
+        <button class="visor-nav visor-sig" id="visor-sig" aria-label="Foto siguiente">›</button>
+    </div>
+
+    <!-- ============ MODAL EXTRÁÑAME ============ -->
+    <div class="modal" id="modal-extraname" role="dialog" aria-modal="true" aria-labelledby="extraname-texto">
+        <div class="modal-caja">
+            <div class="modal-icono" aria-hidden="true">💜</div>
+            <p class="modal-texto" id="extraname-texto">…</p>
+            <audio id="extraname-audio" controls class="modal-audio" hidden></audio>
+            <div class="modal-botones">
+                <button class="boton boton-suave" id="btn-otro-mensaje">🔀 Otro mensajito</button>
+                <button class="enlace" data-cerrar="modal-extraname">Volver</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MODAL CONTRASEÑA ============ -->
+    <div class="modal" id="modal-password" role="dialog" aria-modal="true" aria-labelledby="password-pregunta">
+        <div class="modal-caja">
+            <div class="modal-icono" aria-hidden="true">🔐</div>
+            <p class="modal-texto" id="password-pregunta">¿Cuál fue el primer apodo de cariño que te puse por tus lindos
+                ojitos grandes que me encantan tanto?</p>
+            <input type="text" id="input-secreto" class="campo" placeholder="Escribe aquí tu respuesta…" autocomplete="off">
+            <p class="campo-error" id="error-password" hidden>Respuesta incorrecta… Vuelve a intentarlo, mi amor. 💜</p>
+            <div class="modal-botones">
+                <button class="boton" id="btn-verificar">Desbloquear secreto</button>
+                <button class="enlace" data-cerrar="modal-password">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ MODAL SECRETO ============ -->
+    <div class="modal" id="modal-secreto" role="dialog" aria-modal="true" aria-label="Nuestro futuro">
+        <div class="modal-caja modal-caja-ancha">
+            <div class="modal-icono" aria-hidden="true">👨‍👩‍👧‍👦</div>
+            <video class="secreto-video" id="secreto-video" poster="images/futuro_familia_video.jpg" width="1080"
+                height="810" muted loop playsinline preload="none" aria-label="Nosotros con nuestro hijito, en movimiento">
+                <source src="video/futuro_familia.mp4" type="video/mp4">
+                <source src="video/futuro_familia.webm" type="video/webm">
+            </video>
+            <div class="secreto-texto">
+                <p>Si pudiste abrir esto es porque te acuerdas de mi primer apodo para ti: bebé grande, por esos ojitos
+                    enormes que me encantan desde el principio. Aquí guardo el futuro que más cuido, el que imagino
+                    cuando cierro los ojos y pienso en nosotros dentro de muchos años.</p>
+                <p>Es un futuro que llevo dibujado en el corazón con tu nombre escrito en cada esquina. Un futuro en el
+                    que te tomo de la mano frente a todos los que amamos y te digo "sí, quiero", porque quiero, con toda
+                    la certeza con la que el mar quiere volver a la orilla. Me quiero casar contigo y hacer realidad
+                    nuestros sueños, esos que construimos entre susurros y risas, entre noches largas y mañanas lentas.
+                    Quiero que sean nuestros, para siempre, sin prisa y sin miedo.</p>
+                <p>Y quizás un día, entre todo ese amor que ya de por sí nos desborda, llegue él: Yusuel, nuestro hijito,
+                    con tus ojos o los míos, con tu risa o la mía, pero con el corazón de los dos. Y después ella: Renata,
+                    nuestra linda hijita, tan preciosa como tú, tan llena de luz que el cuarto se ilumina cuando entra.
+                    Frutos de un amor que empezó como amistad hace cuatro años, que hace uno se volvió noviazgo, y que yo
+                    siento que existió siempre, como si el universo lo hubiera preparado mucho antes de que nosotros lo
+                    supiéramos.</p>
+                <p class="cierre">Ese es el futuro que quiero. El único que quiero. El que tiene tu nombre en cada
+                    página. 💜</p>
+            </div>
+            <div class="modal-botones">
+                <button class="enlace" data-cerrar="modal-secreto">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

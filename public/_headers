@@ -1,0 +1,18 @@
+# Cabeceras para Cloudflare Pages (https://developers.cloudflare.com/pages/configuration/headers/)
+
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+# Fotos, audios y video casi nunca cambian: el navegador puede guardarlos 30 días.
+/images/*
+  Cache-Control: public, max-age=2592000
+
+/audio/*
+  Cache-Control: public, max-age=2592000
+
+/video/*
+  Cache-Control: public, max-age=2592000
